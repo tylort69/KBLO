@@ -6,15 +6,22 @@ chars=[]
 
 class key:
     #qwertyv=qwerty value, newv=new value, rn=row number, kn=key number, fu=Finger used, dl=Difficulty level
-    def __init__(self, qwertyv, newv, newshiftv, rn, kn, fu, dl):
+    def __init__(self, qwertyv, newv, qwertyshift, newshiftv, rn, kn, fu, dl):
         self.qwertyv = qwertyv
         self.newv = newv
+        self.qwertyshift = qwertyshift
         self.newshiftv = newshiftv
         self.rn = rn
         self.kn = kn
         self.fu = fu
         self.dl = dl
-
+key1=key("`","","~","",2,1,4,10)
+key2=key("1","","!","",2,2,4,8)
+key3=key("2","","@","",2,3,3,8)
+keyboard=[]
+keyboard.append(key1)
+keyboard.append(key2)
+keyboard.append(key3)
 class charscounter:
     def __init__(self, noo):
         self.spc = noo
