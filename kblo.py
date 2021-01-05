@@ -14,6 +14,7 @@ class key:
         self.kn = kn
         self.fu = fu
         self.dl = dl
+
 class charscounter:
     def __init__(self, noo):
         self.spc = noo
