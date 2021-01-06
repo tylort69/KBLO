@@ -1,0 +1,24 @@
+
+The user will be able to choose all or any combonation of these files (miniumum of 1) to generate their keyboard layout.
+
+c++Code.txt
+customUserInput.txt
+difficultWords.txt
+digraphTortureTest.txt
+medicalWords.txt
+numberTest.txt
+programmingSymbolTortureTest.txt
+pythonCode.txt
+satWords.txt
+taoTeChing.txt
+twentyThousandMostCommon.txt
+warAndPeace.txt
+
+The other options for generating the layout that the user will have are:
+
+Change letters
+Change numbers
+Change symbols
+Change Shift Layer (the capital letter that appears when using shift or caps lock may be differrent than the lowercase key ex.  f=f but shift+f=E)
+Change common Shortcuts keys(c,v,x,z,y,p,s,a,r)
+allow them to select any keys/key that they dont want changed
