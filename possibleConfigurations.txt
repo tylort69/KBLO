@@ -28,5 +28,6 @@ http://www.keyboard-layout-editor.com/##@@=Esc&_x:1%3B&=F1&=F2&=F3&=F4&_x:0.5%3B
 
 with the colors of the keys changed to match a heat graph of the usage of keys using an algorithim something like 
 (cc1.lcz/len(chars)*100)
-		
+to make something that looks simalar to this
+https://preview.redd.it/kcr85msn6y561.jpg?width=2336&format=pjpg&auto=webp&s=4dc56ed357ba449ffa80e577ce51d8c8109a19ab
 		
