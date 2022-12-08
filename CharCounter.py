@@ -2,6 +2,12 @@
 import csv
 import string
 
+#import sys to access subproccess arguments
+import sys
+
+# Access the filename passed by the third program
+filenameGlobal = sys.argv[1]
+
 def parse_input(filename):
     # create an empty dictionary to store the results
     results = {}
@@ -36,16 +42,20 @@ def parse_input(filename):
 def write_to_csv(results, filename):
     # open the output file
     with open(filename, 'w', newline='') as csvfile:
-        writer = csv.DictWriter(csvfile, fieldnames=["Character", "Occurrence", "Percentage"], delimiter="\t")
+        # specify the delimiter to use when writing to the file
+        writer = csv.DictWriter(csvfile, fieldnames=["Character", "Occurrence", "Percentage"])
         # Write the header row
         writer.writeheader()
         # Iterate over each character and its count and percentage in the results
         for char, data in results.items():
             count, percentage = data
             # Write the character, count, and percentage to the output file
-            writer.writerow({"Character": f"{char}", "Occurrence": count, "Percentage": percentage})
+            if char==",":
+                writer.writerow({"Character": f",", "Occurrence": count, "Percentage": percentage})
+            else:
+                writer.writerow({"Character": f"{char}", "Occurrence": count, "Percentage": percentage})
 
 # parse the input from the text file
-results = parse_input('teest.txt')
+results = parse_input(filenameGlobal)
 # write the results to a CSV file
 write_to_csv(results, 'charcount.csv')

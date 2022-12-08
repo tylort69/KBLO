@@ -1,5 +1,10 @@
 #Import CSV to be able to use csv functions
 import csv
+#import sys to access subproccess arguments
+import sys
+
+# Access the filename passed by the third program
+filename = sys.argv[1]
 
 # Open the file containing the list of digraphs and read the contents into a string
 with open('digraphs.txt', 'r') as f:
@@ -63,7 +68,7 @@ with open('digraphcount.csv', 'w', newline='') as csvfile:
 
     # Count the occurrences of each digraph in the input string
     # Open the file and read the contents into a string
-    with open('teest.txt', 'r') as f:
+    with open(filename, 'r') as f:
         input_string = f.read()
     digraph_counts = digraph_counter.count(input_string)
 

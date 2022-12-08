@@ -100,6 +100,24 @@ class Key:
     def get_key_position(self):
         return self.key_position
 
+    def update_properties(self, character, default_value, default_shift_value, allowed_to_be_changed, is_changed, shift_allowed_to_be_changed, is_shift_changed, new_value, new_shift_value, hand_used, finger, key_position):
+        self.character = character
+        self.default_value = default_value
+        self.default_shift_value = default_shift_value
+        self.allowed_to_be_changed = allowed_to_be_changed
+        self.is_changed = is_changed
+        self.shift_allowed_to_be_changed = shift_allowed_to_be_changed
+        self.is_shift_changed = is_shift_changed
+        self.new_value = new_value
+        self.new_shift_value = new_shift_value
+        self.hand_used = hand_used
+        self.finger = finger
+        self.key_position = key_position
+
+    def __str__(self):
+        # Return a string representation of the key object
+        return f"Character: {self.character}, Default value: {self.default_value}, Default shift value: {self.default_shift_value}, Allowed to be changed: {self.allowed_to_be_changed}, Is changed: {self.is_changed}, Shift allowed to be changed: {self.shift_allowed_to_be_changed}, Is shift changed: {self.is_shift_changed}, New value: {self.new_value}, New shift value: {self.new_shift_value}, Hand used: {self.hand_used}, Finger: {self.finger}, Key position: {self.key_position}"
+
 # Generate a list of all characters on the keyboard
 characters = [chr(i) for i in range(ord(' '), ord('~')+1)]
 
@@ -157,6 +175,24 @@ for key in keys:
     # Add the key object to the list
     key_objects.append(key_obj)
 
+# Define the update_key_properties() function
+def update_key_properties(key_objects, value, update_shift, update_symbols, update_number, update_shortcuts):
+    # Create a list to hold the updated key objects
+    updated_keys = []
+
+    # Iterate over the key objects
+    for key in key_objects:
+        # Update the properties for the key
+        key.update_properties(key.character, key.default_value, key.default_shift_value, value, key.is_changed, update_shift, key.is_shift_changed, key.new_value, key.new_shift_value, key.hand_used, key.finger, key.key_position)
+
+        # Print the updated key object
+        print(key)
+
+        # Add the updated key object to the list
+        updated_keys.append(key)
+
+    # Return the list of updated key objects
+    return updated_keys
 class MainWindow(QWidget):
     def __init__(self):
         super().__init__()
@@ -208,6 +244,14 @@ class MainWindow(QWidget):
         layout.addLayout(shift_layer_layout)
         layout.addLayout(shortcuts_layout)
         self.setLayout(layout)
+        
+        # Connect the clicked signal to a function that updates the properties of the key objects
+        self.letters_check.clicked.connect(lambda: update_key_properties(key_objects, self.letters_check.isChecked(), self.shift_layer_check.isChecked(), self.symbols_check.isChecked(), self.numbers_check.isChecked(), self.shortcuts_check.isChecked()))
+        self.numbers_check.clicked.connect(lambda: update_key_properties(key_objects, self.letters_check.isChecked(), self.shift_layer_check.isChecked(), self.symbols_check.isChecked(), self.numbers_check.isChecked(), self.shortcuts_check.isChecked()))
+        self.symbols_check.clicked.connect(lambda: update_key_properties(key_objects, self.letters_check.isChecked(), self.shift_layer_check.isChecked(), self.symbols_check.isChecked(), self.numbers_check.isChecked(), self.shortcuts_check.isChecked()))
+        self.shift_layer_check.clicked.connect(lambda: update_key_properties(key_objects, self.letters_check.isChecked(), self.shift_layer_check.isChecked(), self.symbols_check.isChecked(), self.numbers_check.isChecked(), self.shortcuts_check.isChecked()))
+        self.shortcuts_check.clicked.connect(lambda: update_key_properties(key_objects, self.letters_check.isChecked(), self.shift_layer_check.isChecked(), self.symbols_check.isChecked(), self.numbers_check.isChecked(), self.shortcuts_check.isChecked()))
+        
 # Open a file for writing
 with open('key_objects.csv', 'w') as csvfile:
     # Create a writer object

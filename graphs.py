@@ -1,46 +1,104 @@
-import matplotlib.pyplot as plt
 import csv
+import matplotlib.pyplot as plt
 
-# Open the file and read the data
-with open("charcount.csv") as csv_file:
-    reader = csv.reader(csv_file, delimiter="\t")
-
-    # Skip the header row
+# read the data from the csv file
+data = {}
+with open('charcount.csv', 'r') as f:
+    reader = csv.reader(f)
+    
+    # skip the first line (header)
     next(reader)
+    
+    # read each line and extract the character, occurrence, and percentage
+    for line in reader:
+        character, occurrence, percentage = line
+        data[character] = (int(occurrence), float(percentage))
 
-    # Read the data into a list of tuples, checking each value
-    # to make sure it can be converted to the correct data type
-    data = [(row[0], int(row[1]) if row[1].isnumeric() else 0, float(row[2]) if row[2].isdecimal() else 0.0) for row in reader]
+# sort the data in descending order by occurrence
+sorted_data = sorted(data.items(), key=lambda x: x[1][0], reverse=True)
 
-# Extract the letters, the number of occurrences, and the percentages
-# into separate lists
-character, occurrences, percentages = zip(*data)
+# extract the character, occurrence, and percentage data
+characters = [c[0] for c in sorted_data]
+occurrences = [c[1][0] for c in sorted_data]
+percentages = [c[1][1] for c in sorted_data]
 
-# Create the figure and two subplots
-fig, ax1 = plt.subplots()
+# create a figure with a specific size
+fig = plt.figure(figsize=(20, 10))
+
+# create the bar graph with two y-axes
+ax1 = plt.subplot()
+
+# create the first y-axis for the occurrences data
+ax1.bar(characters, occurrences, color='b')
+ax1.set_xlabel('Character')
+ax1.set_ylabel('Occurrences', color='b')
+ax1.tick_params('y', colors='b')
+
+# create the second y-axis for the percentages data
 ax2 = ax1.twinx()
+ax2.plot(characters, percentages, color='r')
+ax2.set_ylabel('Percentages', color='r')
+ax2.tick_params('y', colors='r')
 
-# Create the bar graph for the number of occurrences
-# on the first subplot
-ax1.bar(character, occurrences, color="blue", width=2)
+# set the y-limits to be 110% of the maximum value
+max_occurrences = max(occurrences)
+max_percentages = max(percentages)
+ax1.set_ylim(0, max_occurrences * 1.1)
+ax2.set_ylim(0, max_percentages * 1.1)
 
-# Set the y-axis limit for the first subplot
-ax1.set_ylim(0, (max(occurrences)+(max(occurrences)/10)))
+# set the locations and labels of the x-axis ticks
+ax1.set_xticks(range(len(characters)))
+ax1.set_xticklabels(characters)
 
-# Create the bar graph for the percentages
-# on the second subplot
-ax2.bar(character, percentages, color="red", width=0.5)
+# rotate the x-axis labels to make them vertical
+plt.xticks(rotation=90)
 
-# Set the y-axis limit for the second subplot
-ax2.set_ylim(0, (max(percentages)+(max(percentages)/10)))
-print(max(percentages))
-print(max(percentages)/10)
-print((max(percentages)+(max(percentages)/10)))
-# Add labels and title to the graph
-ax1.set_xlabel("Letter")
-ax1.set_ylabel("Number of Occurrences")
-ax2.set_ylabel("Percentage")
-plt.title("Number of Occurrences and Percentage for Each Letter")
+# add padding between the subplot and the figure
+plt.subplots_adjust(bottom=0.15, top=0.9)
 
-# Show the graph
+# show the first plot
 plt.show()
+
+
+# read the data from the csv file
+data = {}
+with open('digraphcount.csv', 'r') as f:
+    reader = csv.reader(f)
+    
+    # skip the first line (header)
+    next(reader)
+    
+     # read each line and extract the digraph, occurrence
+    for line in reader:
+        digraph, occurrence = line
+        data[digraph] = int(occurrence)
+
+# sort the data sort the data in descending order by occurrence
+sorted_data = sorted(data.items(), key=lambda x: x[1], reverse=True)
+
+#extract the digraph and occurrence data
+digraphs = [d[0] for d in sorted_data]
+occurrences = [d[1] for d in sorted_data]
+
+#create a new figure with a specific size
+fig = plt.figure(figsize=(20, 10))
+
+#create the bar graph
+ax = plt.subplot()
+ax.bar(digraphs, occurrences, color='b')
+ax.set_xlabel('Digraph')
+ax.set_ylabel('Occurrences', color='b')
+
+#set the locations and labels of the x-axis ticks
+ax.set_xticks(range(len(digraphs)))
+ax.set_xticklabels(digraphs)
+
+#rotate the x-axis labels to make them vertical
+plt.xticks(rotation=90)
+
+#add padding between the subplot and the figure
+plt.subplots_adjust(bottom=0.15, top=0.9)
+
+#show the plot
+plt.show()
+
