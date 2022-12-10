@@ -107,9 +107,6 @@ class DigraphCounter:
         end_time = time.perf_counter()
         elapsed_time = end_time - start_time
         
-        # Append the elapsed time to the list of chunk times
-        self.chunk_times.append(elapsed_time)
-        
         # Print the elapsed time and the size of the chunk
         print("Chunk took %fms to complete %dkb\n" % (elapsed_time * 1000, len(chunk) / 1024))
 

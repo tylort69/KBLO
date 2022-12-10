@@ -12,10 +12,10 @@ temp = os.path.join(cwd, "./resources", "demofile.txt")
 filename = temp
 
 # Launch the first program, CharCounter.py, and pass the filename as an argument
-p1 = subprocess.Popen(['python', 'CharCounter.py', filename])
+p1 = subprocess.Popen(['python', './python/CharCounter.py', filename])
 
 # Launch the second program, DigraphCounter.py, and pass the filename as an argument
-p2 = subprocess.Popen(['python', 'DigraphCounter.py', filename], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+p2 = subprocess.Popen(['python', './python/DigraphCounter.py', filename], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
 # Use the communicate method to read the output of the second subprocess as it's being generated
 output, error = p2.communicate()
